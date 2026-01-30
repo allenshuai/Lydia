@@ -120,12 +120,43 @@
                 transform: translateY(0);
             }
         }
+
+        .go-back-btn {
+            display: none;
+            margin-top: 20px;
+            background: rgba(255, 255, 255, 0.8);
+            color: #ff6b9d;
+            border: 2px solid #ffb3d1;
+            padding: 12px 25px;
+            border-radius: 15px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            font-weight: 600;
+            font-family: 'Fredoka One', 'Comfortaa', cursive;
+            box-shadow: 0 4px 10px rgba(255, 179, 209, 0.3);
+        }
+
+        .go-back-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(255, 179, 209, 0.5);
+            background: rgba(255, 255, 255, 0.95);
+        }
+
+        .go-back-btn:active {
+            transform: translateY(0);
+        }
+
+        .go-back-btn.show {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="image-container">
-            <img src="image.jpg" alt="Cute decoration" id="main-image">
+            <img src="Screenshot 2026-01-29 at 10.22.08 PM.png" alt="Cute decoration" id="main-image">
         </div>
         
         <h1>Lydia's feet is soooo freexing</h1>
@@ -139,6 +170,8 @@
 
         <div class="result" id="result"></div>
     </div>
+
+    <button class="go-back-btn" id="goBackBtn" onclick="goBack()">Go Back & Choose Again</button>
 
     <script>
         const responses = {
@@ -157,6 +190,26 @@
             buttons.forEach(btn => {
                 btn.style.display = 'none';
             });
+
+            // Show go back button
+            const goBackBtn = document.getElementById('goBackBtn');
+            goBackBtn.classList.add('show');
+        }
+
+        function goBack() {
+            const result = document.getElementById('result');
+            result.classList.remove('show');
+            result.textContent = '';
+
+            // Show buttons again
+            const buttons = document.querySelectorAll('.choice-btn');
+            buttons.forEach(btn => {
+                btn.style.display = 'block';
+            });
+
+            // Hide go back button
+            const goBackBtn = document.getElementById('goBackBtn');
+            goBackBtn.classList.remove('show');
         }
 
         // Handle image loading error - hide image container if image doesn't exist
