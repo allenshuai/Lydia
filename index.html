@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lydia's Feet</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Comfortaa:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -12,8 +15,8 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Fredoka One', 'Comfortaa', cursive;
+            background: rgba(255, 240, 245, 0.95);
             min-height: 100vh;
             display: flex;
             justify-content: center;
@@ -22,26 +25,42 @@
         }
 
         .container {
-            background: white;
-            border-radius: 20px;
-            padding: 40px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 30px;
+            padding: 30px;
             max-width: 500px;
             width: 100%;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
             text-align: center;
         }
 
+        .image-container {
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .image-container img {
+            max-width: 200px;
+            max-height: 200px;
+            border-radius: 20px;
+            object-fit: cover;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
         h1 {
-            color: #333;
-            margin-bottom: 20px;
-            font-size: 24px;
+            color: #ff6b9d;
+            margin-bottom: 15px;
+            font-size: 28px;
+            font-weight: 600;
         }
 
         .message {
             color: #666;
-            font-size: 18px;
+            font-size: 20px;
             margin-bottom: 30px;
             line-height: 1.6;
+            font-weight: 400;
         }
 
         .choices {
@@ -52,35 +71,38 @@
         }
 
         .choice-btn {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+            color: #fff;
             border: none;
-            padding: 15px 30px;
-            border-radius: 10px;
-            font-size: 18px;
+            padding: 18px 30px;
+            border-radius: 15px;
+            font-size: 20px;
             cursor: pointer;
             transition: transform 0.2s, box-shadow 0.2s;
             font-weight: 600;
+            font-family: 'Fredoka One', 'Comfortaa', cursive;
+            box-shadow: 0 4px 10px rgba(255, 154, 158, 0.3);
         }
 
         .choice-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 154, 158, 0.5);
         }
 
         .choice-btn:active {
-            transform: translateY(0);
+            transform: translateY(-1px);
         }
 
         .result {
             display: none;
-            color: #667eea;
-            font-size: 20px;
+            color: #ff6b9d;
+            font-size: 22px;
             font-weight: 600;
             margin-top: 20px;
-            padding: 20px;
-            background: #f0f0f0;
-            border-radius: 10px;
+            padding: 25px;
+            background: rgba(255, 240, 245, 0.8);
+            border-radius: 15px;
+            border: 2px solid #ffb3d1;
         }
 
         .result.show {
@@ -102,22 +124,32 @@
 </head>
 <body>
     <div class="container">
-        <h1>Lydia's feet is feeling freezing</h1>
-        <p class="message">what to do?</p>
+        <div class="image-container">
+            <img src="image.jpg" alt="Cute decoration" id="main-image">
+        </div>
+        
+        <h1>Lydia's feet is soooo freexing</h1>
+        <p class="message">what should Lydia do, who should we call for help?</p>
         
         <div class="choices">
-            <button class="choice-btn" onclick="handleChoice()">ALLENN</button>
-            <button class="choice-btn" onclick="handleChoice()">Allen</button>
-            <button class="choice-btn" onclick="handleChoice()">Allen</button>
+            <button class="choice-btn" onclick="handleChoice('ALLEN')">ALLEN</button>
+            <button class="choice-btn" onclick="handleChoice('allen')">allen</button>
+            <button class="choice-btn" onclick="handleChoice('someone else')">someone else</button>
         </div>
 
         <div class="result" id="result"></div>
     </div>
 
     <script>
-        function handleChoice() {
+        const responses = {
+            'ALLEN': "yess ALLEN will keep them warm for you 💕",
+            'allen': "yes allen will keep them warm for you 💕",
+            'someone else': "allen just gave you a side eye 👀, but will still keep them warm for you 💕"
+        };
+
+        function handleChoice(choice) {
             const result = document.getElementById('result');
-            result.textContent = "Yes ALlen will keep them warm for you";
+            result.textContent = responses[choice];
             result.classList.add('show');
             
             // Hide buttons after selection
@@ -126,6 +158,11 @@
                 btn.style.display = 'none';
             });
         }
+
+        // Handle image loading error - hide image container if image doesn't exist
+        document.getElementById('main-image').addEventListener('error', function() {
+            this.style.display = 'none';
+        });
     </script>
 </body>
 </html>
